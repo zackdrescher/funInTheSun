@@ -1,0 +1,31 @@
+import java.io.*;
+import java.net.*;
+
+class tcpclient{
+    public static void main(String args[]) throws Exception{
+    
+    	BufferedReader inFromUser = 
+            new BufferedReader(new InputStreamReader(System.in));
+    	/*
+    	System.out.println("Destination IP adress: "); //35.40.155.232
+    	String ip =inFromUser.readLine();
+    	System.out.println("Enter port number: "); //9876
+    	int port = Integer.parseInt(inFromUser.readLine());
+    	*/
+    	Socket clientSocket = new Socket("127.0.0.1", 9876);
+    	
+    	DataOutputStream outToServer = 
+    			new DataOutputStream(clientSocket.getOutputStream());
+    	BufferedReader inFromServer = 
+    			new BufferedReader(
+    					new InputStreamReader(clientSocket.getInputStream()));
+    	
+    	System.out.println("Enter file name: ");
+    	String message = inFromUser.readLine();
+    	outToServer.writeBytes(message+'\n');
+    	
+    	String serverMessage = inFromServer.readLine();
+    	System.out.println("Got from server: "+serverMessage);
+    	clientSocket.close();
+    }
+}

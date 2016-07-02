@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.chart rect {
+  fill: steelblue;
+}
+
+.chart text {
+  fill: white;
+  font: 10px sans-serif;
+  text-anchor: end;
+}
+
+</style>
+<svg class="chart"></svg>
+<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script>
+
+// Stores the data values for the bars
+var data = [4, 8, 15, 16, 23, 42];
+
+// Stores max width and bar height
+var width = 420,
+    barHeight = 20;
+
+// Creates the scale to go from data max (42) to displayed max (420)
+var x = d3.scale.linear()
+    .domain([0, d3.max(data)])
+    .range([0, width]);
+
+// Creates a variable for the SVG element 'chart' and sets the width and height
+// attributes accordingly
+var chart = d3.select(".chart")
+    .attr("width", width)
+    .attr("height", barHeight * data.length);
+
+// This declares and instantiates the bars.
+  // selectAll creates an array of all 'g' elements intially empty. data() binds
+  // the array data to the element in this selection.
+// enter().append() adds a new g element with the given attribute transform.
+// the translate part uses the index i to claculate where the bar should be
+// located.
+var bar = chart.selectAll("g")
+    .data(data)
+  .enter().append("g")
+    .attr("transform", function(d, i) { return "translate(0," + i * barHeight + ")"; });
+
+// For each element in bar (the array of g elements), add a rect element.
+// it looks like passing the scale x automatically applies x(d).
+bar.append("rect")
+    .attr("width", x)
+    .attr("height", barHeight - 1);
+
+// Similar to above but with a text element. a new function is delcared for
+// the x attribute be cause the scale needs to be adjusted.
+// the .text() is what is put between the element tags.
+bar.append("text")
+    .attr("x", function(d) { return x(d) - 3; })
+    .attr("y", barHeight / 2)
+    .attr("dy", ".35em")
+    .text(function(d) { return d; });
+
+</script>
