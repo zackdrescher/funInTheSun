@@ -7,4 +7,9 @@
 Generate statistics and visualizations on the results of Premiere league matches.
 
 ## Todo:
-* Read csv resultins
+* Create team panel containing team fixtures and record. 
+
+## Contents
+
+### 1. importData.py
+Contains functions for reading raw data from csv's and converting them into pandas data structures
