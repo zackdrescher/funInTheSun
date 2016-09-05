@@ -22,3 +22,5 @@ def getPath(div, year):
     divs = {1:"pm",2:"c",3:"l1",4:"l2",5:"con"}
     path = ["/home/zack/Desktop/data/",divs[div],str(year),".csv"]
     return "".join(path)
+
+readSeasons()
