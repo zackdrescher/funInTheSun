@@ -21,6 +21,9 @@ def importSeason(s):
     # Reads csv into pandas data frame
     df = pd.read_csv(path)
 
+    # Convert 'Date' series into pd.datetime typess
+    df['Date'] = pd.to_datetime(df['Date'])
+
     # Selects rows from original dataframe
     df = df[ROWS]
 
