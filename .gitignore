@@ -1,3 +1,4 @@
 *.pyc
 scr.py
 .DS_Store
+*.tif
